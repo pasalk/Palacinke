@@ -39,7 +39,7 @@
 **Napomena:**
 
 - Provjerite da ste sva polja povezane s konekcijom zamjenili vlastitim vrijednostima (autentifikacijski token, URL Home
-  Assistanta)
+  Assistanta, WiFi SSID, Wifi šifru)
     - Token se generira kroz sučelje Home Assistanta
 - Ako imate problema sa uređajem pokrenite Safe boot opciju
 
