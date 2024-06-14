@@ -1,0 +1,502 @@
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+logger:
+  default: info  # Set the default log level (debug, info, warning, error)
+  logs:
+    homeassistant.components.webhook: debug  # Set log level for webhook component
+    homeassistant.core: debug  # Log core actions
+    homeassistant.components.automation: debug  # Log automation actions 
+
+homeassistant:
+  auth_providers:
+    - type: legacy_api_password
+      api_password: YOUR_API_PASSWORD
+#    - type: trusted_networks
+#      trusted_networks:
+#        - 
+#      allow_bypass_login: true
+
+ #pify-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI0ZDc5NjVkZTliYmY0NzJjOTRlOWJjNzE4ZTExNWEyYyIsImlhdCI6MTcxNzY3MTgwMSwiZXhwIjoyMDMzMDMxODAxfQ.WPnw8YSPLFNJKEkMCaLcfHtUFVz6i_chkb36aCTBkUY
+ #app-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIzMWFjZGUyOTc0NTY0MzI5OWIyZDYxZjZiMDBiMGM1ZiIsImlhdCI6MTcxNzY3MTg0MywiZXhwIjoyMDMzMDMxODQzfQ.eW3_xGKQ8VSYcmj0ur9iUykT8ml_BTiqkEtr_6jz2Ls   
+
+input_number:
+  device_1_humidity:
+    name: Device 1 Humidity
+    min: 0
+    max: 100
+    step: 1
+    mode: box
+    initial: 0
+  device_1_min_humidity:
+    name: Device 1 Minimum Humidity
+    min: 0
+    max: 100
+    step: 1
+    initial: 100
+  device_1_max_humidity:
+    name: Device 1 Maximum Humidity
+    min: 0
+    max: 100
+    step: 1
+    initial: 0
+  device_2_humidity:
+    name: Device 2 Humidity
+    min: 0
+    max: 100
+    step: 1
+    mode: box
+    initial: 0
+  device_2_min_humidity:
+    name: Device 2 Minimum Humidity
+    min: 0
+    max: 100
+    step: 1
+    initial: 100
+  device_2_max_humidity:
+    name: Device 2 Maximum Humidity
+    min: 0
+    max: 100
+    step: 1
+    initial: 0
+  device_3_humidity:
+    name: Device 3 Humidity
+    min: 0
+    max: 100
+    step: 1
+    mode: box
+    initial: 0
+  device_3_min_humidity:
+    name: Device 3 Minimum Humidity
+    min: 0
+    max: 100
+    step: 1
+    initial: 100
+  device_3_max_humidity:
+    name: Device 3 Maximum Humidity
+    min: 0
+    max: 100
+    step: 1
+    initial: 0
+  device_4_humidity:
+    name: Device 4 Humidity
+    min: 0
+    max: 100
+    step: 1
+    mode: box
+    initial: 0
+  device_4_min_humidity:
+    name: Device 4 Minimum Humidity
+    min: 0
+    max: 100
+    step: 1
+    initial: 100
+  device_4_max_humidity:
+    name: Device 4 Maximum Humidity
+    min: 0
+    max: 100
+    step: 1
+    initial: 0
+
+input_text:
+  device_1_id:
+    name: Device 1 ID
+  device_1_url:
+    name: Device 1 URL
+    initial: "http://192.168.184.116:80"
+  device_2_id:
+    name: Device 2 ID
+  device_2_url:
+    name: Device 2 URL
+    initial: "http://192.168.184.26:81"
+  device_3_id:
+    name: Device 3 ID
+  device_3_url:
+    name: Device 3 URL
+    initial: "http://192.168.184.26:82"
+  device_4_id:
+    name: Device 4 ID
+  device_4_url:
+    name: Device 4 URL
+    initial: "http://192.168.184.26:83"
+  water_1:
+    name: Water 1
+    initial: "nowater"
+  water_2:
+    name: Water 2
+    initial: "nowater"
+  water_3:
+    name: Water 3
+    initial: "nowater"
+  water_4:
+    name: Water 4
+    initial: "nowater"
+
+rest_command:
+  send_color_to_device:
+    url: "{{ url }}"
+    method: POST
+    headers:
+      Content-Type: "application/json"
+    payload: '{"color": "{{ color }}"}'
+  send_humidity_to_web_app:
+    url: "http://192.168.184.133:8080/humidity/update"
+    method: POST
+    headers:
+      Content-Type: "application/json"
+    payload: "{\"device\": \"{{ device_id }}\", \"humidity\": \"{{ humidity }}\"}"
+
+automation:
+  - alias: Process Incoming Humidity Data for Device 1
+    trigger:
+      platform: webhook
+      webhook_id: device_1_humidity_data
+    action:
+      - service: input_number.set_value
+        data_template:
+          entity_id: input_number.device_1_humidity
+          value: "{{ trigger.json.humidity }}"
+      - service: input_text.set_value
+        data_template:
+          entity_id: input_text.device_1_id
+          value: "{{ trigger.json.device }}"
+
+  - alias: Process Incoming Humidity Data for Device 2
+    trigger:
+      platform: webhook
+      webhook_id: device_2_humidity_data
+    action:
+      - service: input_number.set_value
+        data_template:
+          entity_id: input_number.device_2_humidity
+          value: "{{ trigger.json.humidity }}"
+      - service: input_text.set_value
+        data_template:
+          entity_id: input_text.device_2_id
+          value: "{{ trigger.json.device }}"
+
+  - alias: Process Incoming Humidity Data for Device 3
+    trigger:
+      platform: webhook
+      webhook_id: device_3_humidity_data
+    action:
+      - service: input_number.set_value
+        data_template:
+          entity_id: input_number.device_3_humidity
+          value: "{{ trigger.json.humidity }}"
+      - service: input_text.set_value
+        data_template:
+          entity_id: input_text.device_3_id
+          value: "{{ trigger.json.device }}"
+
+  - alias: Process Incoming Humidity Data for Device 4
+    trigger:
+      platform: webhook
+      webhook_id: device_4_humidity_data
+    action:
+      - service: input_number.set_value
+        data_template:
+          entity_id: input_number.device_4_humidity
+          value: "{{ trigger.json.humidity }}"
+      - service: input_text.set_value
+        data_template:
+          entity_id: input_text.device_4_id
+          value: "{{ trigger.json.device }}"
+  
+  - alias: Send Humidity 1 to Web Application
+    trigger:
+      platform: state
+      entity_id: input_number.device_1_humidity
+    condition:
+      condition: template
+      value_template: "{{ trigger.from_state.state != trigger.to_state.state }}"
+    action:
+      - variables: 
+          device_id: "{{ states('input_text.device_1_id') }}"
+          current_humidity: "{{ states('input_number.device_1_humidity') | float }}"
+      - service: rest_command.send_humidity_to_web_app
+        data_template:
+          device_id: "{{ device_id }}"
+          humidity: "{{ current_humidity }}"
+
+  - alias: Send Humidity 2 to Web Application
+    trigger:
+      platform: state
+      entity_id: input_number.device_2_humidity
+    condition:
+      condition: template
+      value_template: "{{ trigger.from_state.state != trigger.to_state.state }}"
+    action:
+      - variables: 
+          device_id: "{{ states('input_text.device_2_id') }}"
+          current_humidity: "{{ states('input_number.device_2_humidity') | float }}"
+      - service: rest_command.send_humidity_to_web_app
+        data_template:
+          device_id: "{{ device_id }}"
+          humidity: "{{ current_humidity }}"
+
+  - alias: Send Humidity 3 to Web Application
+    trigger:
+      platform: state
+      entity_id: input_number.device_3_humidity
+    condition:
+      condition: template
+      value_template: "{{ trigger.from_state.state != trigger.to_state.state }}"
+    action:
+      - variables: 
+          device_id: "{{ states('input_text.device_3_id') }}"
+          current_humidity: "{{ states('input_number.device_3_humidity') | float }}"
+      - service: rest_command.send_humidity_to_web_app
+        data_template:
+          device_id: "{{ device_id }}"
+          humidity: "{{ current_humidity }}"
+
+  - alias: Send Humidity 4 to Web Application
+    trigger:
+      platform: state
+      entity_id: input_number.device_4_humidity
+    condition:
+      condition: template
+      value_template: "{{ trigger.from_state.state != trigger.to_state.state }}"
+    action:
+      - variables: 
+          device_id: "{{ states('input_text.device_4_id') }}"
+          current_humidity: "{{ states('input_number.device_4_humidity') | float }}"
+      - service: rest_command.send_humidity_to_web_app
+        data_template:
+          device_id: "{{ device_id }}"
+          humidity: "{{ current_humidity }}"
+
+  - alias: Check Device 1 Humidity Levels
+    trigger:
+      platform: state
+      entity_id: input_number.device_1_humidity
+    action:
+      - variables:
+          current_humidity: "{{ states('input_number.device_1_humidity') | float }}"
+          min_humidity: "{{ states('input_number.device_1_min_humidity') | float }}"
+          max_humidity: "{{ states('input_number.device_1_max_humidity') | float }}"
+          url: "{{ states('input_text.device_1_url') }}"
+          device_id: "{{ states('input_text.device_1_id') }}"
+          current_color: "{{ states('input_text.water_1') }}"
+      - choose:
+          - conditions:
+              - condition: template
+                value_template: "{{ current_humidity < min_humidity and min_humidity != 100 and current_color != 'water'  }}"
+            sequence:
+              - service: input_text.set_value
+                data:
+                  entity_id: input_text.water_1
+                  value: "water"
+              - service: rest_command.send_color_to_device
+                data_template:
+                  url: "{{ url }}"
+                  device_id: "{{ device_id }}"
+                  color: "water"
+          - conditions:
+              - condition: template
+                value_template: "{{ current_humidity > max_humidity and max_humidity != 0 and current_color != 'nowater'}}"
+            sequence:
+              - service: input_text.set_value
+                data:
+                  entity_id: input_text.water_1
+                  value: "nowater"
+              - service: rest_command.send_color_to_device
+                data_template:
+                  url: "{{ url }}"
+                  device_id: "{{ device_id }}"
+                  color: "nowater"
+
+  - alias: Check Device 2 Humidity Levels
+    trigger:
+      platform: state
+      entity_id: input_number.device_2_humidity
+    action:
+      - variables:
+          current_humidity: "{{ states('input_number.device_2_humidity') | float }}"
+          min_humidity: "{{ states('input_number.device_2_min_humidity') | float }}"
+          max_humidity: "{{ states('input_number.device_2_max_humidity') | float }}"
+          url: "{{ states('input_text.device_2_url') }}"
+          device_id: "{{ states('input_text.device_2_id') }}"
+      - choose:
+          - conditions:
+              - condition: template
+                value_template: "{{ current_humidity < min_humidity and min_humidity != 100 }}"
+            sequence:
+              - service: input_text.set_value
+                data:
+                  entity_id: input_text.water_2
+                  value: "water"
+              - service: rest_command.send_color_to_device
+                data_template:
+                  url: "{{ url }}"
+                  device_id: "{{ device_id }}"
+                  color: "water"
+          - conditions:
+              - condition: template
+                value_template: "{{ current_humidity > max_humidity and max_humidity != 0 }}"
+            sequence:
+              - service: input_text.set_value
+                data:
+                  entity_id: input_text.water_2
+                  value: "nowater"
+              - service: rest_command.send_color_to_device
+                data_template:
+                  url: "{{ url }}"
+                  device_id: "{{ device_id }}"
+                  color: "nowater"
+
+  - alias: Check Device 3 Humidity Levels
+    trigger:
+      platform: state
+      entity_id: input_number.device_3_humidity
+    action:
+      - variables:
+          current_humidity: "{{ states('input_number.device_3_humidity') | float }}"
+          min_humidity: "{{ states('input_number.device_3_min_humidity') | float }}"
+          max_humidity: "{{ states('input_number.device_3_max_humidity') | float }}"
+          url: "{{ states('input_text.device_3_url') }}"
+          device_id: "{{ states('input_text.device_3_id') }}"
+      - choose:
+          - conditions:
+              - condition: template
+                value_template: "{{ current_humidity < min_humidity and min_humidity != 100 }}"
+            sequence:
+              - service: input_text.set_value
+                data:
+                  entity_id: input_text.water_3
+                  value: "water"
+              - service: rest_command.send_color_to_device
+                data_template:
+                  url: "{{ url }}"
+                  device_id: "{{ device_id }}"
+                  color: "water"
+          - conditions:
+              - condition: template
+                value_template: "{{ current_humidity > max_humidity and max_humidity != 0 }}"
+            sequence:
+              - service: input_text.set_value
+                data:
+                  entity_id: input_text.water_3
+                  value: "nowater"
+              - service: rest_command.send_color_to_device
+                data_template:
+                  url: "{{ url }}"
+                  device_id: "{{ device_id }}"
+                  color: "nowater"
+
+  - alias: Check Device 4 Humidity Levels
+    trigger:
+      platform: state
+      entity_id: input_number.device_4_humidity
+    action:
+      - variables:
+          current_humidity: "{{ states('input_number.device_4_humidity') | float }}"
+          min_humidity: "{{ states('input_number.device_4_min_humidity') | float }}"
+          max_humidity: "{{ states('input_number.device_4_max_humidity') | float }}"
+          url: "{{ states('input_text.device_4_url') }}"
+          device_id: "{{ states('input_text.device_4_id') }}"
+      - choose:
+          - conditions:
+              - condition: template
+                value_template: "{{ current_humidity < min_humidity and min_humidity != 100 }}"
+            sequence:
+              - service: system_log.write
+                data_template:
+                  level: info
+                  message: >
+                    Received webhook data:  current_humidity: {{ states('input_number.device_4_humidity') | float }},
+                    min_humidity: {{ states('input_number.device_4_min_humidity') | float }},
+                    max_humidity: {{ states('input_number.device_4_max_humidity') | float }},
+                    url: {{ states('input_text.device_4_url') }},
+                    device_id: "{{ states('input_text.device_4_id') }}"
+              - service: input_text.set_value
+                data:
+                  entity_id: input_text.water_4
+                  value: "water"
+              - service: rest_command.send_color_to_device
+                data_template:
+                  url: "{{ url }}"
+                  device_id: "{{ device_id }}"
+                  color: "water"
+          - conditions:
+              - condition: template
+                value_template: "{{ current_humidity > max_humidity and max_humidity != 0 }}"
+            sequence:
+              - service: input_text.set_value
+                data:
+                  entity_id: input_text.water_4
+                  value: "nowater"
+              - service: rest_command.send_color_to_device
+                data_template:
+                  url: "{{ url }}"
+                  device_id: "{{ device_id }}"
+                  color: "nowater"
+
+  - alias: Update Min/Max Humidity from Web App
+    trigger:
+      platform: webhook
+      webhook_id: update_min_max_humidity
+    action:
+      - choose:
+          - conditions:
+              - condition: template
+                value_template: "{{ trigger.json.device_id == states('input_text.device_1_id') }}"
+            sequence:
+              - service: input_number.set_value
+                data_template:
+                  entity_id: input_number.device_1_min_humidity
+                  value: "{{ trigger.json.minHumidity }}"
+              - service: input_number.set_value
+                data_template:
+                  entity_id: input_number.device_1_max_humidity
+                  value: "{{ trigger.json.maxHumidity }}"
+          - conditions:
+              - condition: template
+                value_template: "{{ trigger.json.device_id == states('input_text.device_2_id') }}"
+            sequence:
+              - service: system_log.write
+                data_template:
+                  level: info
+                  message: >
+                    Getting from WEB: "{\"device\": \"{{ states('input_text.device_2_id') }}\", \"humidity\": \"{{ states('input_number.device_2_humidity') }}\"}"
+              - service: input_number.set_value
+                data_template:
+                  entity_id: input_number.device_2_min_humidity
+                  value: "{{ trigger.json.minHumidity }}"
+              - service: input_number.set_value
+                data_template:
+                  entity_id: input_number.device_2_max_humidity
+                  value: "{{ trigger.json.maxHumidity }}"
+          - conditions:
+              - condition: template
+                value_template: "{{ trigger.json.device_id == states('input_text.device_3_id') }}"
+            sequence:
+              - service: input_number.set_value
+                data_template:
+                  entity_id: input_number.device_3_min_humidity
+                  value: "{{ trigger.json.minHumidity }}"
+              - service: input_number.set_value
+                data_template:
+                  entity_id: input_number.device_3_max_humidity
+                  value: "{{ trigger.json.maxHumidity }}"
+          - conditions:
+              - condition: template
+                value_template: "{{ trigger.json.device_id == states('input_text.device_4_id') }}"
+            sequence:
+              - service: input_number.set_value
+                data_template:
+                  entity_id: input_number.device_4_min_humidity
+                  value: "{{ trigger.json.minHumidity }}"
+              - service: input_number.set_value
+                data_template:
+                  entity_id: input_number.device_4_max_humidity
+                  value: "{{ trigger.json.maxHumidity }}"
