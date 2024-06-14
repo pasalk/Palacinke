@@ -54,6 +54,7 @@
 >2. Instalacija potrebnih Python biblioteka:
 >
 >   ``pip install requests flask colorama``
+>
 >3. Pokretanje virtualnih senzora
 >
 >   ``python virtual_senzor_2.py``
@@ -81,6 +82,7 @@
 >2. Povucite Docker sliku
 >
 >   ``docker pull ghcr.io/home-assistant/home-assistant:stable``
+>
 >3. Pokrenite kontejner
 >
 >   ``docker run -d \
@@ -92,7 +94,9 @@
     -p 8123:8123 \
     ghcr.io/home-assistant/home-assistant:stable
     ``
+>
 >4. Otvorite Home Assistant u pregledniku i pratite ostatak uputa
+>
 >5. U direktoriju gdje ste namjestili Home Assistant zamjenite ``configuration.yaml`` dokument s dokumentom u ovom
     projektu
 
@@ -122,6 +126,7 @@
 > 2. Kreirajte izvršnu datoteku projekta
 > 
 >   ``mvn clean compile``
+> 
 >3. Pokrenite aplikaciju
 >
 >   ``mvn spring-boot:run``
@@ -141,6 +146,7 @@
 >    ``https://nodejs.org/en/download/package-manager``
 >
 > 2. Otvorite terminal
+> 
 > 3. Instalacija Angular CLI
 >
 >   ``npm install -g @angular/cli``
@@ -148,9 +154,11 @@
 > 4. Pozicionirajte se u direktorij projekta:
 >
 >   ``cd path/to/your/angular/project``
+> 
 > 5. Instalirajte potrebne pakete
 >
 >   ``npm install``
+> 
 > 6. Pokrenite aplikaciju
 >
 >   ``ng serve``
