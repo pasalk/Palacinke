@@ -54,7 +54,6 @@
 >2. Instalacija potrebnih Python biblioteka:
 >
 >   ``pip install requests flask colorama``
->
 >3. Pokretanje virtualnih senzora
 >
 >   ``python virtual_senzor_2.py``
@@ -65,7 +64,7 @@
 
 **Napomena:**
 
-- Provjerite da ste sva polja povezane s konekcijom zamjenili vlastitim vrijednostima (autentifikacijski token, URL Home
+- Provjerite da ste sva polja povezana s konekcijom zamjenili vlastitim vrijednostima (autentifikacijski token, URL Home
   Assistanta)
     - Token se generira kroz sučelje Home Assistanta
 - Ako Home Assistant nije dostupan, može se pokrenut json_taker skriptu koja će simulirati prijem podataka:
@@ -82,7 +81,6 @@
 >2. Povucite Docker sliku
 >
 >   ``docker pull ghcr.io/home-assistant/home-assistant:stable``
->
 >3. Pokrenite kontejner
 >
 >   ``docker run -d \
@@ -94,9 +92,7 @@
     -p 8123:8123 \
     ghcr.io/home-assistant/home-assistant:stable
     ``
->
 >4. Otvorite Home Assistant u pregledniku i pratite ostatak uputa
->
 >5. U direktoriju gdje ste namjestili Home Assistant zamjenite ``configuration.yaml`` dokument s dokumentom u ovom
     projektu
 
@@ -121,13 +117,12 @@
 > Instalacija Maven-a
 
 **Pokretanje Spring Boot aplikacije:**
-> 1. Kreirajte bazu podataka pokretanjem docker_compose.yaml datoteke
+> 1. Kreirajte bazu podataka i mongo-express pokretanjem docker_compose.yaml datoteke
 >
 > 2. Kreirajte izvršnu datoteku projekta
 > 
 >   ``mvn clean compile``
-> 
->3. Pokrenite aplikaciju
+> 3. Pokrenite aplikaciju
 >
 >   ``mvn spring-boot:run``
 
@@ -136,7 +131,7 @@
   Assistanta, URL Angular aplikacije)
     - Token se generira kroz sučelje Home Assistanta
 - Predodređeni port za pokretanje Spring Boot aplikacije je **8080**
-
+- Predodređeni port za MongoDB bazu je **27027** i za mongo-express sučelje je **8081**
 
 ## Angular
 
@@ -146,7 +141,6 @@
 >    ``https://nodejs.org/en/download/package-manager``
 >
 > 2. Otvorite terminal
-> 
 > 3. Instalacija Angular CLI
 >
 >   ``npm install -g @angular/cli``
@@ -154,11 +148,9 @@
 > 4. Pozicionirajte se u direktorij projekta:
 >
 >   ``cd path/to/your/angular/project``
-> 
 > 5. Instalirajte potrebne pakete
 >
 >   ``npm install``
-> 
 > 6. Pokrenite aplikaciju
 >
 >   ``ng serve``
