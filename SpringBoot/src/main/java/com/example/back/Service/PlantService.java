@@ -90,7 +90,7 @@ public class PlantService {
         ArrayList<String> ret = new ArrayList<>();
         List<Plant> allPlants = getAllPlants();
         for (Plant plant : allPlants) {
-            if (plant.getName().isBlank() || plant.getMinHumidity() == 100 || plant.getMaxHumidity() == 50)
+            if (plant.getName().isBlank() || plant.getMinHumidity() == 100 || plant.getMaxHumidity() == 0)
                 ret.add(plant.getId());
         }
         return ret;
