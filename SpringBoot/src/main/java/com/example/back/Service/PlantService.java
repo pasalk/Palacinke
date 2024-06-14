@@ -43,7 +43,7 @@ public class PlantService {
 
     public void setPlantHumidity(String id, int humidity) {
         Plant oldPlant = plantRepository.findById(id).get();
-        Plant updatePlant = new Plant(oldPlant.getId(), oldPlant.getName(), 40, 60, humidity);
+        Plant updatePlant = new Plant(oldPlant.getId(), oldPlant.getName(), oldPlant.getMinHumidity(), oldPlant.getMaxHumidity(), humidity);
         plantRepository.delete(oldPlant);
         plantRepository.save(updatePlant);
     }
@@ -57,7 +57,7 @@ public class PlantService {
         headers.add("Accept", "application/json");
 
         String body = "{\n" +
-                "    \"device\" : \"" + device + "\",\n" +
+                "    \"device\" : \"" + device + "\"\n" +
                 "}";
 
         HttpEntity<String> request = new HttpEntity<>(body, headers);
@@ -100,7 +100,7 @@ public class PlantService {
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
-        //headers.add("Authorization", "Bearer " + token);
+        headers.add("Authorization", "Bearer " + token);
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.add("Accept", "application/json");
 
