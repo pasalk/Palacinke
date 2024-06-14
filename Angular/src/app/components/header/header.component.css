@@ -1,0 +1,61 @@
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.center-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.palacinke {
+  padding: 10px 20px;
+  margin-right: 10px;
+  font-size: 24px;
+  border-radius: 5px;
+}
+
+.watering-system {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.add-plant-button {
+  margin-left: auto; /* Pushes the button to the far right */
+}
+
+mat-divider {
+  width: 100%;
+}
+
+/* Custom dark green button style */
+.dark-green-button {
+  background-color: #006400; /* Dark green background */
+  color: white; /* White text */
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: inline-flex; /* Use Flexbox */
+  align-items: center; /* Align items vertically */
+  gap: 8px; /* Add space between icon and text */
+}
+
+.dark-green-button:hover {
+  background-color: #004d00; /* Slightly darker green on hover */
+}
+
+.dark-green-button mat-icon {
+  font-size: 20px; /* Ensure the icon scales correctly */
+  height: 20px; /* Explicitly set the icon's height */
+  width: 20px; /* Explicitly set the icon's width */
+  vertical-align: middle; /* Align icon vertically with the text */
+}

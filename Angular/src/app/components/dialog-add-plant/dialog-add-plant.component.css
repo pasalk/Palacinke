@@ -1,0 +1,10 @@
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+mat-form-field {
+  display: block;
+  margin-bottom: 10px;
+}
