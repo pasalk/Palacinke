@@ -126,6 +126,7 @@
 > 2. Kreirajte izvršnu datoteku projekta
 > 
 >   ``mvn clean compile``
+> 
 > 3. Pokrenite aplikaciju
 >
 >   ``mvn spring-boot:run``
@@ -152,9 +153,11 @@
 > 4. Pozicionirajte se u direktorij projekta:
 >
 >   ``cd path/to/your/angular/project``
+> 
 > 5. Instalirajte potrebne pakete
 >
 >   ``npm install``
+> 
 > 6. Pokrenite aplikaciju
 >
 >   ``ng serve``
