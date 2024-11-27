@@ -94,7 +94,9 @@
     -p 8123:8123 \
     ghcr.io/home-assistant/home-assistant:stable
     ``
+> 
 >4. Otvorite Home Assistant u pregledniku i pratite ostatak uputa
+> 
 >5. U direktoriju gdje ste namjestili Home Assistant zamjenite ``configuration.yaml`` dokument s dokumentom u ovom
     projektu
 
